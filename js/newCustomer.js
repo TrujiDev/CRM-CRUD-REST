@@ -1,4 +1,5 @@
 import { showAlert } from './functions.js';
+import { newCustomer } from './API.js';
 
 (function () {
 	const form = document.querySelector('#form');
@@ -14,16 +15,18 @@ import { showAlert } from './functions.js';
 		const company = document.querySelector('#company').value;
 
 		const customer = {
-			name,
-			email,
-			phone,
 			company,
+			email,
+			name,
+			phone,
 		};
 
 		if (validate(customer)) {
 			showAlert('All fields are required', 'error');
 			return;
-		}
+        }
+        
+        newCustomer(customer);
 	}
 
 	/**
