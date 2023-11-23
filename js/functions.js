@@ -1,3 +1,7 @@
+/**
+ * Displays an alert message on the page.
+ * @param {string} msg - The message to be displayed in the alert.
+ */
 export function showAlert(msg) {
 	const alert = document.querySelector('.alert');
 
