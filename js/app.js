@@ -1,9 +1,10 @@
-import { getCustomers } from './API.js';
+import { getCustomers, deleteCustomer } from './API.js';
 
 (function () {
 	const customerList = document.querySelector('#customers-list');
 
-	document.addEventListener('DOMContentLoaded', showCustomers);
+    document.addEventListener('DOMContentLoaded', showCustomers);
+    customerList.addEventListener('click', confirmDelete);
 
 	async function showCustomers() {
 		const customers = await getCustomers();
@@ -30,5 +31,16 @@ import { getCustomers } from './API.js';
             `;
             customerList.appendChild(row);
 		});
-	}
+    }
+    
+    function confirmDelete(evt) {
+        if (evt.target.classList.contains('delete')) {
+            const customerId = parseInt(evt.target.dataset.customer);
+            const confirmDelete = confirm('Are you sure you want to delete this customer?');
+
+            if (confirmDelete) { 
+                deleteCustomer(customerId);
+            }
+        }
+    }
 })();
