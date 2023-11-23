@@ -20,11 +20,29 @@ export const newCustomer = async customer => {
 	}
 };
 
+/**
+ * Retrieves customers from the server.
+ * @returns {Promise<Array>} A promise that resolves to an array of customers.
+ */
 export const getCustomers = async () => {
 	try {
 		const response = await fetch(url);
 		const customers = await response.json();
 		return customers;
+	} catch (error) {
+		console.log(error);
+	}
+};
+
+/**
+ * Deletes a customer with the specified ID.
+ * @param {number} id - The ID of the customer to delete.
+ */
+export const deleteCustomer = id => {
+	try {
+		fetch(`${url}/${id}`, {
+			method: 'DELETE',
+		});
 	} catch (error) {
 		console.log(error);
 	}
