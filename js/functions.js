@@ -35,3 +35,12 @@ export function showAlert(msg) {
 		}, 3000);
 	}
 }
+
+/**
+ * Validates an object by checking if all its values are not empty.
+ * @param {Object} obj - The object to be validated.
+ * @returns {boolean} - Returns true if any value in the object is empty, otherwise returns false.
+ */
+export function validate(obj) {
+	return !Object.values(obj).every(input => input !== '');
+}
