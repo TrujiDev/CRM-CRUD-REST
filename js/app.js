@@ -3,9 +3,13 @@ import { getCustomers, deleteCustomer } from './API.js';
 (function () {
 	const customerList = document.querySelector('#customers-list');
 
-    document.addEventListener('DOMContentLoaded', showCustomers);
-    customerList.addEventListener('click', confirmDelete);
+	document.addEventListener('DOMContentLoaded', showCustomers);
+	customerList.addEventListener('click', confirmDelete);
 
+	/**
+	 * Fetches customers and displays them in a table.
+	 * @returns {Promise<void>} A promise that resolves when the customers are displayed.
+	 */
 	async function showCustomers() {
 		const customers = await getCustomers();
 
@@ -29,18 +33,24 @@ import { getCustomers, deleteCustomer } from './API.js';
                     <a href="#" data-customer="${id}" class="text-red-600 hover:text-red-900 delete">Delete</a>
                 </td>
             `;
-            customerList.appendChild(row);
+			customerList.appendChild(row);
 		});
-    }
-    
-    function confirmDelete(evt) {
-        if (evt.target.classList.contains('delete')) {
-            const customerId = parseInt(evt.target.dataset.customer);
-            const confirmDelete = confirm('Are you sure you want to delete this customer?');
+	}
 
-            if (confirmDelete) { 
-                deleteCustomer(customerId);
-            }
-        }
-    }
+	/**
+	 * Confirms the deletion of a customer based on the event target.
+	 * @param {Event} evt - The event object.
+	 */
+	function confirmDelete(evt) {
+		if (evt.target.classList.contains('delete')) {
+			const customerId = parseInt(evt.target.dataset.customer);
+			const confirmDelete = confirm(
+				'Are you sure you want to delete this customer?'
+			);
+
+			if (confirmDelete) {
+				deleteCustomer(customerId);
+			}
+		}
+	}
 })();
