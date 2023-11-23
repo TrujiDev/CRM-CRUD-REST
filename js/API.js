@@ -19,3 +19,13 @@ export const newCustomer = async customer => {
 		console.log(error);
 	}
 };
+
+export const getCustomers = async () => {
+	try {
+		const response = await fetch(url);
+		const customers = await response.json();
+		return customers;
+	} catch (error) {
+		console.log(error);
+	}
+};
