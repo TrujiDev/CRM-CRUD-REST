@@ -48,11 +48,36 @@ export const deleteCustomer = id => {
 	}
 };
 
+/**
+ * Retrieves a customer by their ID.
+ * @param {number} id - The ID of the customer.
+ * @returns {Promise<Object>} - A promise that resolves to the customer object.
+ */
 export const getCustomerById = async id => {
 	try {
 		const response = await fetch(`${url}/${id}`);
 		const customer = await response.json();
 		return customer;
+	} catch (error) {
+		console.log(error);
+	}
+};
+
+/**
+ * Updates a customer record.
+ * @param {Object} customer - The customer object to be updated.
+ * @returns {Promise<void>} - A promise that resolves when the update is complete.
+ */
+export const updateCustomer = async customer => {
+	try {
+		await fetch(`${url}/${customer.id}`, {
+			method: 'PUT',
+			body: JSON.stringify(customer),
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		});
+		window.location.href = 'index.html';
 	} catch (error) {
 		console.log(error);
 	}
